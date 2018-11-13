@@ -1,0 +1,25 @@
+{
+  "name": "elearning-classroom",
+  "version": "1.0.0",
+  "description": "An Elearning Platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kerschel/Elearning-Classroom.git"
+  },
+  "author": "Kerschel James",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kerschel/Elearning-Classroom/issues"
+  },
+  "homepage": "https://github.com/Kerschel/Elearning-Classroom#readme",
+  "dependencies": {
+    "bootstrap": "^4.1.3",
+    "express": "^4.16.4",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.5"
+  }
+}
