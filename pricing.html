@@ -1,26 +1,67 @@
-<link href='css/pricing.css' rel='stylesheet' type='text/css'>
+<html lang="en">
+<body>
+
+
+    <link href='css/pricing.css' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="css/clean-blogprice.css" rel="stylesheet">
   
 
 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css /> -->
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="#">Virtual Knowledge</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-			<div class="navbar-nav">
-			<a class="nav-item nav-link active" href="/">Home</a>
-			<a class="nav-item nav-link" href="sign-up">Sign Up<span class="sr-only">(current)</span></a>
-			<a class="nav-item nav-link" href="log-in">Sign In</a>
-			<a class="nav-item nav-link" href="pricing">Pricing</a>
-			</div>
-		</div>
-	</nav>
-    <div class="container">
+ 
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Virtual Knowledge</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="pricing"><h6>Pricing</h6></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="post.html">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Signin</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <header class="masthead" style="background-image: url('images/elearning.jpg')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 col-md-10 mx-auto">
+            
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container-fluid back">
         <div class="row">
             <div class="col-md-4 col-sm-6">
                 <div class="pricingTable">
@@ -33,12 +74,15 @@
                         <span class="amount-sm">00</span>
                     </div>
                     <ul class="pricing-content">
-                        <li><i class="fa fa-check"></i> 50GB Disk Space</li>
-                        <li><i class="fa fa-check"></i> 50 Email Accounts</li>
-                        <li><i class="fa fa-check"></i> 50GB Bandwidth</li>
-                        <li><i class="fa fa-check"></i> 15 Subdomains</li>
+                        <li><i class="fa fa-check"></i> 1 Classroom / Teacher</li>
+                        <li><i class="fa fa-check"></i> 10 Students capacity</li>
+                        <li><i class="fa fa-check"></i> EC2 - t3.micro</li>
+                        <li><i class="fa fa-check"></i> 100MB Max Upload size</li>
+                        <li><i class="fa fa-check"></i> 25GB DB Storage</li>
+                        <li><i class="fa fa-times" style="color:red"></i>Autoscaling</li>
+
                     </ul>
-                    <a href="login.html" class="pricingTable-signup">Sign Up</a>
+                    <a href="sign-up" class="pricingTable-signup">Sign Up</a>
                 </div>
             </div>
                 <div class="col-md-4 col-sm-6">
@@ -52,12 +96,14 @@
                         <span class="amount-sm">99</span>
                     </div>
                     <ul class="pricing-content">
-                        <li><i class="fa fa-check"></i> 50GB Disk Space</li>
-                        <li><i class="fa fa-check"></i> 50 Email Accounts</li>
-                        <li><i class="fa fa-check"></i> 50GB Bandwidth</li>
-                        <li><i class="fa fa-check"></i> 15 Subdomains</li>
+                        <li><i class="fa fa-check"></i> 5 Classroom / Teacher</li>
+                        <li><i class="fa fa-check"></i> 25 Students capacity</li>
+                        <li><i class="fa fa-check"></i> EC2 - t3.small</li>
+                        <li><i class="fa fa-check"></i> 500MB Max Upload size</li>
+                        <li><i class="fa fa-check"></i> 25GB DB Storage</li>
+                        <li><i class="fa fa-check"></i> Autoscaling</li>
                     </ul>
-                    <a href="login.html" class="pricingTable-signup">Sign Up</a>
+                    <a href="sign-up" class="pricingTable-signup">Sign Up</a>
                 </div>
             </div>
             <div class="col-md-4 col-sm-6">
@@ -71,14 +117,25 @@
                         <span class="amount-sm">99</span>
                     </div>
                     <ul class="pricing-content">
-                        <li><i class="fa fa-check"></i> 50GB Disk Space</li>
-                        <li><i class="fa fa-check"></i> 50 Email Accounts</li>
-                        <li><i class="fa fa-check"></i> 50GB Bandwidth</li>
-                        <li><i class="fa fa-check"></i> 15 Subdomains</li>
+                        <li><i class="fa fa-check"></i> 10 Classroom / Teacher</li>
+                        <li><i class="fa fa-check"></i> 50 Students capacity</li>
+                        <li><i class="fa fa-check"></i> EC2 - t3.small</li>
+                        <li><i class="fa fa-check"></i> 1GB Max Upload size</li>
+                        <li><i class="fa fa-check"></i> 25GB DB Storage</li>
+                        <li><i class="fa fa-check"></i> Autoscaling</li>
                     </ul>
-                    <a href="login.html" class="pricingTable-signup">Sign Up</a>
+                    <a href="sign-up" class="pricingTable-signup">Sign Up</a>
                 </div>
             </div>
         </div>
 
 </div>
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/clean-blog.min.js"></script>
+</body>
+
+</html>

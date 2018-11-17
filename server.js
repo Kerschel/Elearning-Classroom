@@ -24,4 +24,8 @@ app.get('/pricing', (req, res) => {
     res.sendFile(path.join(__dirname + '/pricing.html'));
 })
 
+app.get('/profile', (req, res) => {
+    res.sendFile(path.join(__dirname + '/profile.html'));
+})
+
 app.listen(8080);
