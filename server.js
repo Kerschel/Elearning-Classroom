@@ -54,19 +54,19 @@ connection.connect(function(err) {
   }
 
 //   var sqls = "INSERT into plans VALUES (1,'free','1',1)";
-  var sqls = "select * from users";
+//   var sqls = "select *";
 
-     connection.query(sqls, function (err, result) {
-        if (err) throw err;
-        console.log(result);
-    })
+//      connection.query(sqls, function (err, result) {
+//         if (err) throw err;
+//         console.log(result);
+//     })
 // dropTables();
 // createTables();
 app.use(express.static(path.join(__dirname, 'public')));
 var urlencodedParser = bodyParser.urlencoded({extended:false})
 
-app.post('/saveuser',urlencodedParser, (req, res) => {
-    var body = req.body;
+app.post('/saveuser',urlencodedParser   , (req, res) => {
+    let body = req.body;
     var  first_name = body.firstname;
     var  last_name = body.lastname;
     var  password = body.pass;
@@ -75,7 +75,7 @@ app.post('/saveuser',urlencodedParser, (req, res) => {
 
 
     
-    var sql = 'INSERT INTO users VALUES(20, `body.firstname`,"+last_name+","+email+","+password+","+accounttype+")';
+    var sql = "INSERT INTO users VALUES(15,"+first_name+","+last_name+","+email+","+password+","+accounttype+")";
         // var sql = "INSERT INTO users VALUES(1,'Kerschel','James','kerschels@hotmail.com','testing123','teacher')";
 
     connection.query(sql ,function (err, result) {
