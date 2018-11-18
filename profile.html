@@ -51,7 +51,7 @@
 <div class="container bootstrap snippet">
     <div class="row">
 
-  		<div id ="user" class="col-sm-10" style ="margin-left:20px"><h1>User name</h1></div>
+  		<div id ="user" class="col-sm-10" style ="margin-left:40px"><h1>User name</h1></div>
         </div>
     <div class="row">
   		<div class="col-sm-3"><!--left col-->
@@ -131,38 +131,54 @@
               <hr>
               
              </div><!--/tab-pane-->
-        
+        <!-- Plan History -->
+        <div class="tab-pane" id="history">
+            <table class="table">
+               <thead>
+                    <tr>
+                        <th scope="col">Plan</th>
+                        <th scope="col">Classrooms</th>
+                        <th scope="col">Teachers</th>
+                        <th scope="col">EC2</th>
+                        <th scope="col">Video</th>
+                        <th scope="col">Upload Cap.</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                     <tbody id='historytable'>
+
+                     </tbody>
+                </thead>
+                </table>
+        </div><!--/tab-pane-->
+
+
+
+<!-- PLan history end-->
+
+        <!-- Plans -->
              <div class="tab-pane" id="Plans">
                <hr>
-                  <form class="form" action="/home" method="post" id="">
                   <div class="form-group">
                       <div class="col-xs-4">
                           <br>
-                          <button class="btn btn-lg btn-success" type="submit"><i id ='free' class=""></i> FREE</button>
+                          <button class="btn btn-lg btn-success" type="submit" id ='freeb' ><i id ='free' class=""></i> FREE</button>
                     </div>
-                      </div>
+                </div>
 
-                  </form>
-                   <form class="form" action="##" method="post" id="">
                   <div class="form-group">
                       <div class="col-xs-4">
                           <br>
-                          <button class="btn btn-lg btn-primary" type="reset"><i id ='basic' class=""></i> Basic</button>
+                          <button class="btn btn-lg btn-primary" type="reset" id ='basicb' ><i id ='basic' class=""></i> Basic</button>
                       
                     </div>
-                      </div>
+                </div>
 
-                  </form>
-                   <form class="form" action="##" method="post" id="">
                   <div class="form-group">
                       <div class="col-xs-4">
                           <br>
-                          <button class="btn btn-lg btn-warning" type="reset"><i id ='enterprise' class=""></i> Enterprise</button>
+                          <button class="btn btn-lg btn-warning" type="reset" id ='enterpriseb' ><i id ='enterprise' class=""></i> Enterprise</button>
                     </div>
                       </div>
-
-                  </form>
-                    
 
 
                   <form class="form" action="##" method="post" id="">
@@ -212,6 +228,7 @@
                      
              
               	</form>
+                  
               
               <hr>
               
@@ -230,13 +247,33 @@
     <script src="js/clean-blog.min.js"></script>
 
     	<script >
+
+ 
+            $("#basicb").click(function(){
+		$.post("/profile/add/basic", function(data, status){
+            location.reload();
+        });
+    });
+
+    $("#freeb").click(function(){
+		$.post("/profile/add/free", function(data, status){
+            location.reload();
+        });
+    });
+
+     $("#enterpriseb").click(function(){
+		$.post("/profile/add/enterprise", function(data, status){
+            location.reload();
+        });
+    });
 	
 function titleCase(str) {
   return str.toLowerCase().replace(/\b(\w)/g, s => s.toUpperCase());
 }
 		$( document ).ready(function() {
+            var history = null;
+
 		$.get("/profile/get", function(data, status){
-      console.log(data[0]);
         data = (data)[0];
         $('#first_name').val(data.first_name);
         $('#last_name').val(data.last_name);
@@ -245,10 +282,53 @@ function titleCase(str) {
         $('#user').html("<h1>"+titleCase(data.first_name)+' ' + titleCase(data.last_name)+"</h1>");
 		});
 
-
     $.get("/profile/plan",function(data){
-console.log(data[0].type)
-        data = data[0];
+
+    for(var i=0;i<data.length-1;i++){
+        history = data[i];
+    if(history.type == 'free'){
+        $("#historytable").append(`
+        <tr>
+        <th scope="row">Free Tier</th>
+        <td>1</td>
+        <td>5</td>
+        <td>T3.Micro</td>
+        <td>No Video</td>
+        <td>100 MB</td>
+        <td>Free</td>
+        </tr>`)
+        }
+
+    else if(history.type == 'basic'){
+            $("#historytable").append(`
+        <tr>
+        <th scope="row">Basic Tier</th>
+        <td>5</td>
+        <td>25</td>
+        <td>T3.Small</td>
+        <td>No Video</td>
+        <td>500 MB</td>
+        <td>$14.99</td>
+        </tr>`)
+    }
+    else if(history.type == 'enterprise'){
+               $("#historytable").append(`
+        <tr>
+        <th scope="row">Enterprise Tier</th>
+        <td>10</td>
+        <td>50</td>
+        <td>T3.Large</td>
+        <td>Video Streaming</td>
+        <td>1 GB</td>
+        <td>$24.99</td>
+        </tr>`)
+    }
+    }
+    
+   
+
+        data = data[data.length-1];
+        console.log(data);
       if(data.type == 'free'){
         $('#free').addClass("glyphicon glyphicon-ok-sign");
         $("#classroom").val('1');
