@@ -30,13 +30,21 @@
 					<img src="images/img-02.png" alt="IMG">
 				</div>
 
-				<form class="login100-form validate-form" method="get" action="log-in">
+				<form class="login100-form validate-form" method="post" action="/saveuser">
 					<span class="login100-form-title">
 						Member Register
 					</span>
 
 					<div class="wrap-input100 validate-input" >
-						<input class="input100" type="text" name="name" placeholder="Name">
+						<input class="input100" type="text" name="firstname" placeholder="First Name">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-user" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" >
+						<input class="input100" type="text" name="lastname" placeholder="Last Name">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-user" aria-hidden="true"></i>
@@ -60,10 +68,10 @@
 					</div>
 					<div style="margin-left:30px">
 						<label class="radio-inline">
-						<input type="radio" name="optradio" checked>Student
+						<input type="radio" name="type" value='Student' checked>Student
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="optradio">Teacher
+						<input type="radio" name="type" value='Teacher'>Teacher
 						</label>
 					</div>
 					
@@ -101,6 +109,9 @@
 		$('.js-tilt').tilt({
 			scale: 1.1
 		})
+
+
+		
 	</script>
 <!--===============================================================================================-->
 

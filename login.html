@@ -32,7 +32,7 @@
 					<img src="images/img-02.png" alt="IMG">
 				</div>
 
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" method ='post' action ='getloggedin' >
 					<span class="login100-form-title">
 						Member Login
 					</span>
@@ -102,11 +102,8 @@ function getURLParameter(name) {
     );
 }
 
-$("#email").val(getURLParameter("email").replace('%40',"@"));
 
-$('#login').click(function(){
 
-});
 	</script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>

@@ -3,10 +3,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+
     <link href="css/clean-blog.css" rel="stylesheet">
 
 <head>
@@ -54,7 +51,7 @@
 <div class="container bootstrap snippet">
     <div class="row">
 
-  		<div class="col-sm-10" style ="margin-left:40px"><h1>User name</h1></div>
+  		<div id ="user" class="col-sm-10" style ="margin-left:20px"><h1>User name</h1></div>
         </div>
     <div class="row">
   		<div class="col-sm-3"><!--left col-->
@@ -67,7 +64,7 @@
 
                
           <div class="panel panel-default">
-            <div class="panel-heading" style="padding-left:40%;">Teacher<i class="fa fa-link fa-1x"></i></div>
+            <div id="type" class="panel-heading" style="padding-left:40%;">Teacher<i class="fa fa-link fa-1x"></i></div>
             <!-- <div class="panel-body"><a href="http://bootnipets.com">bootnipets.com</a></div> -->
           </div>
           
@@ -88,12 +85,13 @@
               
           <div class="tab-content">
             <div class="tab-pane active" id="home">
+            
                 <hr>
                   <form class="form" action="##" method="post" id="registrationForm">
                       <div class="form-group">
                           
                           <div class="col-xs-6">
-                              <label for="first_name"><h4>First name</h4></label>
+                              <label for="first_name"><h4> First Name </h4></label>
                               <input disabled  type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
                           </div>
                       </div>
@@ -127,29 +125,96 @@
                           </div>
                       </div>
                      
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <br>
-                        <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-                        <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
-                    </div>
-                      </div>
+        
               	</form>
               
               <hr>
               
              </div><!--/tab-pane-->
         
-             <div class="tab-pane" id="history">
-                <table>
-                <thead>
-                <tr>
-                <td>fds</td>
-                <td>fds</td>
-                <td>fds</td>
-<tr>
-                </thead>
-                </table>	
+             <div class="tab-pane" id="Plans">
+               <hr>
+                  <form class="form" action="/home" method="post" id="">
+                  <div class="form-group">
+                      <div class="col-xs-4">
+                          <br>
+                          <button class="btn btn-lg btn-success" type="submit"><i id ='free' class=""></i> FREE</button>
+                    </div>
+                      </div>
+
+                  </form>
+                   <form class="form" action="##" method="post" id="">
+                  <div class="form-group">
+                      <div class="col-xs-4">
+                          <br>
+                          <button class="btn btn-lg btn-primary" type="reset"><i id ='basic' class=""></i> Basic</button>
+                      
+                    </div>
+                      </div>
+
+                  </form>
+                   <form class="form" action="##" method="post" id="">
+                  <div class="form-group">
+                      <div class="col-xs-4">
+                          <br>
+                          <button class="btn btn-lg btn-warning" type="reset"><i id ='enterprise' class=""></i> Enterprise</button>
+                    </div>
+                      </div>
+
+                  </form>
+                    
+
+
+                  <form class="form" action="##" method="post" id="">
+                      <div class="form-group">
+                          
+                          <div class="col-xs-4">
+                              <label for="first_name"><h4>Classrooms</h4></label>
+                              <input disabled  type="text" class="form-control" name="classroom" id="classroom" placeholder="first name" title="enter your first name if any.">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-4">
+                            <label for="last_name"><h4>Max Teachers</h4></label>
+                              <input disabled type="text" class="form-control" name="teachers" id="teachers" placeholder="last name" title="enter your last name if any.">
+                          </div>
+                      </div>
+          
+                      <div class="form-group">
+                          
+                          <div class="col-xs-4">
+                              <label for="phone"><h4>EC2 Instance</h4></label>
+                              <input disabled type="text" class="form-control" name="ec2" id="ec2" placeholder="enter phone" title="enter your phone number if any.">
+                          </div>
+                      </div>
+          
+                      <div class="form-group">
+                          <div class="col-xs-4">
+                             <label for="mobile"><h4>Upload Capacity</h4></label>
+                              <input disabled type="text" class="form-control" name="upload" id="upload" placeholder="enter mobile number" title="enter your mobile number if any.">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-4">
+                              <label for="email"><h4>Auto Scaling</h4></label>
+                              <input disabled type="email" class="form-control" name="auto" id="auto" placeholder="you@email.com" title="enter your email.">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-4">
+                              <label for="email"><h4>Video Streaming</h4></label>
+                              <input disabled type="email" class="form-control" name="video" id="video" placeholder="you@email.com" title="enter your email.">
+                          </div>
+                      </div>
+                     
+             
+              	</form>
+              
+              <hr>
+              
                 </div>
                
               </div><!--/tab-pane-->
@@ -163,3 +228,60 @@
 
     <!-- Custom scripts for this template -->
     <script src="js/clean-blog.min.js"></script>
+
+    	<script >
+	
+function titleCase(str) {
+  return str.toLowerCase().replace(/\b(\w)/g, s => s.toUpperCase());
+}
+		$( document ).ready(function() {
+		$.get("/profile/get", function(data, status){
+      console.log(data[0]);
+        data = (data)[0];
+        $('#first_name').val(data.first_name);
+        $('#last_name').val(data.last_name);
+        $('#email').val(data.email);
+        $('#type').text(titleCase(data.accounttype));
+        $('#user').html("<h1>"+titleCase(data.first_name)+' ' + titleCase(data.last_name)+"</h1>");
+		});
+
+
+    $.get("/profile/plan",function(data){
+console.log(data[0].type)
+        data = data[0];
+      if(data.type == 'free'){
+        $('#free').addClass("glyphicon glyphicon-ok-sign");
+        $("#classroom").val('1');
+        $("#ec2").val('T3.Micro');
+        $("#teachers").val('10');
+        $("#upload").val('100 MB MAX');
+        $("#video").val('No online Steaming');
+        $("#auto").val('No AutoScale');
+      } 
+      else
+      if(data.type == 'basic'){
+        $('#basic').addClass("glyphicon glyphicon-ok-sign");
+        $("#classroom").val('5');
+        $("#ec2").val('T3.Small');
+        $("#teachers").val('25');
+        $("#upload").val('500 MB MAX');
+        $("#video").val('No online Steaming');
+        $("#auto").val('AutoScale Group');
+      }
+      else{
+        $('#enterprise').addClass("glyphicon glyphicon-ok-sign");
+         $("#classroom").val('10');
+        $("#ec2").val('T3.Large');
+        $("#teachers").val('50');
+        $("#upload").val('1GB MAX');
+        $("#video").val('Online Video Steaming');
+        $("#auto").val('AutoScale Group');
+      }
+    });
+
+
+	
+	});
+
+		
+	</script>
