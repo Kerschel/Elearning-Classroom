@@ -3,5 +3,5 @@
 3. Change the permission of the file to read only (chmod 400 <keypair file> on linux)
 4. Open the deployment.yml and replace [KeyName] with the one you just created.
 5. Run the following command from the directory of the deployment.yml (replace <your name>):
-   aws cloudformation create-stack --stack-name ec2stack-<your name>  --template-body file://$PWD/deployment.yml
+   aws cloudformation create-stack --stack-name ec2stack-<your name> --region us-east-1 --template-body file://$PWD/deployment.yml
 6. Navigate to the CloudFormation front end and view resources being created using the stackID.
