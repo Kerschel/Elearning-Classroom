@@ -6,7 +6,7 @@ This is a cloud E-Learning platform designed for COMP 6905 - Cloud Technologies.
 * Spin up the resources by going into the aws folder and following the Instructions
   * Create a new Keypair on the EC2 Console (us-east-1)
   * Move permission file to the directory.
-  * Change the permission of the file to read only (chmod 400 <keypair file> on linux)
+  * Change the permission of the file to read only (chmod 400 *keypair file* on linux)
   * Open the deployment.yml and replace [KeyName] with the one you just created.
   * Run the following command from the directory of the deployment.yml (replace <your name>):
    aws cloudformation create-stack --stack-name ec2stack-*your name* --region us-east-1 --template-body file://$PWD/deployment.yml

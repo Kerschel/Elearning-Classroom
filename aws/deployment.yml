@@ -39,12 +39,16 @@ Resources:
         FromPort: '2375'
         ToPort: '2375'
         CidrIp: 0.0.0.0/0
+      - IpProtocol: tcp
+        FromPort: '8080'
+        ToPort: '8080'
+        CidrIp: 0.0.0.0/0
   VLSQLDB:
     Type: AWS::RDS::DBInstance
     Properties:
-      DBName: "blog"
+      DBName: "appDB"
       Engine: MySQL
-      MasterUsername: bloguser
+      MasterUsername: admin
       MasterUserPassword: password123
       DBInstanceClass: db.t2.micro
       AllocatedStorage: '5'
@@ -59,80 +63,15 @@ Resources:
   VLDynamoDBTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      AttributeDefinitions:
-        -
-          AttributeName: "ContentId"
-          AttributeType: "S"
-        -
-          AttributeName: "Title"
-          AttributeType: "S"
-        -
-          AttributeName: "Type"
-          AttributeType: "S"
-        -
-          AttributeName: "DateAdded"
-          AttributeType: "S"
-      KeySchema:
-        -
-          AttributeName: "ContentId"
-          KeyType: "HASH"
-        -
-          AttributeName: "Title"
-          KeyType: "RANGE"
       ProvisionedThroughput:
-        ReadCapacityUnits: "5"
-        WriteCapacityUnits: "5"
-      TableName: "vlContentDynamoDB"
-      GlobalSecondaryIndexes:
-        -
-          IndexName: "myGSI"
-          KeySchema:
-            -
-              AttributeName: "Type"
-              KeyType: "HASH"
-            -
-              AttributeName: "Title"
-              KeyType: "RANGE"
-          Projection:
-            NonKeyAttributes:
-              - "ContentId"
-              - "DateAdded"
-            ProjectionType: "INCLUDE"
-          ProvisionedThroughput:
-            ReadCapacityUnits: "5"
-            WriteCapacityUnits: "5"
-        -
-          IndexName: "myGSI2"
-          KeySchema:
-            -
-              AttributeName: "DateAdded"
-              KeyType: "HASH"
-            -
-              AttributeName: "Type"
-              KeyType: "RANGE"
-          Projection:
-            NonKeyAttributes:
-              - "ContentId"
-              - "Title"
-            ProjectionType: "INCLUDE"
-          ProvisionedThroughput:
-            ReadCapacityUnits: "5"
-            WriteCapacityUnits: "5"
-      LocalSecondaryIndexes:
-        -
-          IndexName: "myLSI"
-          KeySchema:
-            -
-              AttributeName: "ContentId"
-              KeyType: "HASH"
-            -
-              AttributeName: "Type"
-              KeyType: "RANGE"
-          Projection:
-            NonKeyAttributes:
-              - "Title"
-              - "DateAdded"
-            ProjectionType: "INCLUDE"
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+      AttributeDefinitions:
+        - AttributeName: ContentId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: ContentId
+          KeyType: HASH
   VLS3Bucket:
     Type: AWS::S3::Bucket
     Properties:
