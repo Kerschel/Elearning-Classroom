@@ -8,4 +8,4 @@ services:
       MYSQL_DATABASE: appDB
       MYSQL_PASSWORD: password123
     ports:
-      - "8080:8080"
+      - "8080:8080" 
