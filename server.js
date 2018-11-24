@@ -60,6 +60,14 @@ connection.connect(function(err) {
           console.log("Users table created");
         });
 
+        var sql = "INSERT INTO " + USERS_TABLE + "(first_name,last_name,email,password,accounttype) values ('admin','admin','admin@gmail.com','adminpw', 'Administrator')"
+        connection.query(sql, function (err, result) {
+          if (err) {
+            return;
+          }
+          console.log("Inserted admin");
+        });
+
         var sql = "CREATE TABLE " + PLANS_TABLE + " (id INT NOT NULL AUTO_INCREMENT, type VARCHAR(255) NOT NULL, active varchar(1),customerid int not null,  PRIMARy KEY(ID) , FOREIGN KEY (customerid) REFERENCES users (ID)) ";
         connection.query(sql, function (err, result) {
           if (err) {
@@ -71,8 +79,14 @@ connection.connect(function(err) {
     });
   });
 
+var sql = "Select * from users";
 
-
+  connection.query(sql, function (err, result) {
+    if (err) {
+      return;
+    }
+    console.log(result);
+  });
 
 
 
@@ -110,17 +124,27 @@ app.post('/getloggedin',urlencodedParser, (req, res) => {
     var cred = 'SELECT id,password from ' + USERS_TABLE + ' where email = ?';
     connection.query(cred, email,function (err, result) {
         if (err) throw err;
-        // console.log(result);
-        if (result[0]['password'] == password){
-            accountid =result[0]['id'];
-            account = email;
-            res.sendFile(path.join(__dirname + '/home.html'));
+        console.log(err,result)
+        try{
+            if (result[0]['password'] == password){
+                accountid =result[0]['id'];
+                account = email;
+                res.sendFile(path.join(__dirname + '/home.html'));
+    
+            }
+            else{
+                res.redirect('/log-in');
+                // console.log(result[0]['password']);
+            }
 
+        }catch( e){
+            if(e){
+                res.redirect('/log-in');
+            }
         }
-        else{
-            res.redirect('/log-in');
-            // console.log(result[0]['password']);
-        }
+            
+        
+       
     })
 
 });
