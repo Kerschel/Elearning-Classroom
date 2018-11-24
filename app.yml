@@ -1,11 +1,11 @@
 version: '3'
 services:
   web:
-    image: princeandrew01/finalcomp6501
+    image: princeandrew01/comp6501
     environment:
       DATABASE_HOST: evlghqs6ws2gww.cnuipuiqebbi.us-east-1.rds.amazonaws.com
       MYSQL_USER: admin
       MYSQL_DATABASE: appDB
       MYSQL_PASSWORD: password123
     ports:
-      - "8080:8080" 
+      - "8080:8080"
