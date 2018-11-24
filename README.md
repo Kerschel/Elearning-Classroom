@@ -1,7 +1,7 @@
-#E Learning Cloud Test platform
+# E Learning Cloud Test platform
 This is a cloud E-Learning platform designed for COMP 6905 - Cloud Technologies. It was desinged by Andrew Singh, Kerschel James, 	Gerard Rique
 
-#Instructions
+# Instructions
 * Clone or download the repository
 * Spin up the resources by going into the aws folder and following the Instructions
   * Create a new Keypair on the EC2 Console (us-east-1)
