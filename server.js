@@ -127,7 +127,7 @@ app.post('/getloggedin',urlencodedParser, (req, res) => {
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname + '/home.html'));
-})
+}) 
 
 app.get('/sign-up', (req, res) => {
     if(accountid !=null){
