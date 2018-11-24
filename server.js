@@ -1,4 +1,4 @@
-var prefix = "aas_";
+var prefix = "";
 var PORT = 8080;
 var CONFIG_TABLENAME = prefix + "config";
 var USERS_TABLE = prefix + "users";
@@ -153,7 +153,7 @@ app.get('/profile', (req, res) => {
 })
 app.get('/profile/get',(req,res)=>{
     console.log(account);
-    var cred = `SELECT * from ` + USERS_TABLE  +` where users.id = `+accountid+` `;
+    var cred = `SELECT * from ` + USERS_TABLE + ` where users.id = `+accountid+` `;
     connection.query(cred, function (err, result) {
      console.log(result,err);
     res.send((result));
@@ -212,4 +212,4 @@ app.post('/profile/add/enterprise',(req,res)=>{
 
 
 
-app.listen(PORT);
+app.listen(8080);
