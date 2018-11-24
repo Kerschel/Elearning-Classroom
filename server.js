@@ -139,8 +139,11 @@ app.get('/sign-up', (req, res) => {
 })
 
 app.get('/log-in', (req, res) => {
+    account = null;
+    accountid = null;
     res.sendFile(path.join(__dirname + '/login.html'));
 })
+
 
 app.get('/pricing', (req, res) => {
 
