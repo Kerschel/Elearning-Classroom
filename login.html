@@ -4,15 +4,18 @@
 	<title>Login Virtual K</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
+<!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-<!--===============================================================================================-->	
+<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
@@ -22,17 +25,42 @@
 <!--===============================================================================================-->
 </head>
 <body>
-
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+		<div class="container">
+			<a class="navbar-brand" href="index.html">Virtual Knowledge</a>
+			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+				Menu
+				<i class="fas fa-bars"></i>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a class="nav-link active" href="/">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="pricing">Pricing</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="log-in">Signin</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				
+
 				<div class="login100-pic js-tilt" data-tilt>
 					<img src="images/img-02.png" alt="IMG">
 				</div>
 
 				<form class="login100-form validate-form" method ='post' action ='getloggedin' >
+					<div id="error_message" class="alert alert-danger" role="alert" style="display:none;">
+					  Error Occured when trying to sign in
+					</div>
 					<span class="login100-form-title">
 						Member Login
 					</span>
@@ -46,13 +74,13 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100" type="password" name="pass" placeholder="Password">
+						<input id="password" class="input100" type="password" name="pass" placeholder="Password">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
 						</span>
 					</div>
-					
+
 					<div class="container-login100-form-btn">
 						<button id ='login' class="login100-form-btn">
 							Login
@@ -78,11 +106,11 @@
 			</div>
 		</div>
 	</div>
-	
-	
 
-	
-<!--===============================================================================================-->	
+
+
+
+<!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
 	<script src="vendor/bootstrap/js/popper.js"></script>
@@ -94,14 +122,51 @@
 	<script >
 		$('.js-tilt').tilt({
 			scale: 1.1
-		})
-	
-function getURLParameter(name) {
-    return decodeURI(
-        (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
-    );
-}
+		});
+		var valid = false;
 
+		function getURLParameter(name) {
+		    return decodeURI(
+		        (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+		    );
+		}
+
+		$('.login100-form').on('submit',function(e){
+			if (valid){
+
+			} else {
+				e.preventDefault();
+				console.log($('#email').val() + " / " + $('#password').val());
+				console.log(window.location.hostname + ":" + window.location.port + '/verifyUser');
+				$('#error_message').hide();
+				var data = {};
+				data.email = $('#email').val();
+				data.password = $('#password').val();
+
+				f = $(this);
+				$.ajax({
+					async:true,
+					url: 'verifyUser',
+					type: 'POST',
+					data: JSON.stringify(data),
+					contentType: 'application/json',
+					success: function(ret){
+						if (ret == "yes"){
+							f.submit();
+							valid = true;
+						} else {
+							$('#error_message').show();
+							valid = false;
+						}
+					},
+					error: function(jqXHR, textStatus, errorThrown){
+						console.log(textStatus + " " + errorThrown);
+						$('#error_message').show();
+					}
+
+				});
+			}
+		})
 
 
 	</script>

@@ -1,22 +1,20 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Profile Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 
-    <link href="css/clean-blog.css" rel="stylesheet">
-
-<head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-
+  </head>
+  <body>
  <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
       <div class="container">
         <a class="navbar-brand" href="/">Virtual Knowledge</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,111 +23,115 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-           
-        
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="pricing">Pricing</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="profile">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="log-out">Logout</a>
+            </li>
           </ul>
         </div>
       </div>
     </nav>
 
-    <!-- Page Header -->
-    <header class="masthead" style="background-image: url('images/elearning.jpg')">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-10 col-md-10 mx-auto">
-            <div class="site-heading">
-              <h1>Virtual Knowledge</h1>
-              <span class="subheading">E-learning Cloud platform customizable for you</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-
 <hr>
 <div class="container bootstrap snippet">
     <div class="row">
 
-  		<div id ="user" class="col-sm-10" style ="margin-left:40px"><h1>User name</h1></div>
+  		<div  class="col-sm-10" style ="margin-left:40px">
+        <h1 id ="user">User name</h1>
+        <p>Change your profile settings including your plan</p>
+      </div>
         </div>
     <div class="row">
   		<div class="col-sm-3"><!--left col-->
-              
+
 
       <div class="text-center">
         <img src="images/teacher.png" class="avatar img-circle img-thumbnail" alt="avatar">
-      
+
       </div></hr><br>
 
-               
+
           <div class="panel panel-default">
             <div id="type" class="panel-heading" style="padding-left:40%;">Teacher<i class="fa fa-link fa-1x"></i></div>
             <!-- <div class="panel-body"><a href="http://bootnipets.com">bootnipets.com</a></div> -->
           </div>
-          
-          
-  
-               
-       
+
+
+
+
+
         </div><!--/col-3-->
-    	<div class="col-sm-9">
+    	   <div class="col-sm-9">
             <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-                <li><a data-toggle="tab" href="#Plans">Plan</a></li>
+              <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home">Personal Information</a></li>
+              <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Plans">Plan</a></li>
+              <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#history">Plan History</a></li>
+            </ul>
 
-                <li><a data-toggle="tab" href="#history">Plan History</a></li>
 
-              </ul>
-
-              
           <div class="tab-content">
             <div class="tab-pane active" id="home">
-            
+
                 <hr>
                   <form class="form" action="##" method="post" id="registrationForm">
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                              <label for="first_name"><h4> First Name </h4></label>
-                              <input disabled  type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
+                      <div class="form-row">
+                        <div class="col">
+                          <div class="form-group">
+                            <label for="first_name"> First Name </label>
+                            <input disabled  type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
                           </div>
-                      </div>
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                            <label for="last_name"><h4>Last name</h4></label>
+                        </div>
+                          <div class="col">
+                            <div class="form-group">
+                              <label for="last_name">Last name</label>
                               <input disabled type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
+                            </div>
                           </div>
                       </div>
-          
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                              <label for="phone"><h4>Phone</h4></label>
+
+                      <div class="form-row">
+                        <div class="col">
+                          <div class="form-group">
+                            <label for="last_name">Last name</label>
+                            <input disabled type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="form-group">
+                              <label for="phone">Phone</label>
                               <input disabled type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
                           </div>
+                        </div>
                       </div>
-          
-                      <div class="form-group">
-                          <div class="col-xs-6">
-                             <label for="mobile"><h4>Mobile</h4></label>
+
+                      <div class="form-row">
+                        <div class="col">
+                          <div class="form-group">
+                             <label for="mobile">Mobile</label>
                               <input disabled type="text" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any.">
                           </div>
-                      </div>
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                              <label for="email"><h4>Email</h4></label>
+                        </div>
+                        <div class="col">
+                          <div class="form-group">
+                              <label for="email">Email</label>
                               <input disabled type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
                           </div>
+                        </div>
                       </div>
-                     
-        
+
+
               	</form>
-              
+
               <hr>
-              
+
              </div><!--/tab-pane-->
         <!-- Plan History -->
         <div class="tab-pane" id="history">
@@ -158,88 +160,125 @@
         <!-- Plans -->
              <div class="tab-pane" id="Plans">
                <hr>
-                  <div class="form-group">
-                      <div class="col-xs-4">
-                          <br>
-                          <button class="btn btn-lg btn-success" type="submit" id ='freeb' ><i id ='free' class=""></i> FREE</button>
-                    </div>
-                </div>
+               <div class="container">
+                 <div class="row">
+                   <div class="col-sm">
+                     <div class="card"id="free_card">
+                       <div class="card-header">
+                         <button class="btn btn-lg btn-success btn-block" type="submit" id ='freeb' ><i id ='free' class=""></i> FREE</button>
+                       </div>
+                       <form action="#" method="post" style="padding:10px;">
+                           <div class="form-group">
+                             <label for="first_name">Classrooms</label>
+                             <input disabled type="text" class="form-control" name="classroom" id="classroom" value="1">
+                           </div>
+                             <div class="form-group">
+                               <label for="phone">EC2 Instance</label>
+                               <input disabled type="text" class="form-control" name="ec2" id="ec2" value="T3.Micro">
+                           </div>
+                           <div class="form-group">
+                             <label for="last_name">Max Teachers</label>
+                               <input disabled type="text" class="form-control" name="teachers" id="teachers" value="10">
+                           </div>
+                           <div class="form-group">
+                              <label for="mobile">Upload Capacity</label>
+                              <input disabled type="text" class="form-control" name="upload" id="upload" value="100 MB Max">
+                           </div>
+                           <div class="form-group">
+                               <label for="email">Video Streaming</label>
+                               <input disabled type="email" class="form-control" name="video" id="video" value="No Autoscale">
+                           </div>
+                           <div class="form-group">
+                               <label for="email">Auto Scaling</label>
+                               <input disabled type="email" class="form-control" name="auto" id="auto" value="No Online Streaming">
+                           </div>
+                       </form>
+                     </div>
+                   </div>
+                   <div class="col-sm">
+                     <div class="card" id="basic_card">
+                       <div class="card-header">
+                         <button class="btn btn-lg btn-primary btn-block" type="submit" id ='basicb' ><i id ='basic' class=""></i> Basic</button>
+                       </div>
+                       <form action="#" method="post" style="padding:10px;">
+                           <div class="form-group">
+                             <label for="first_name">Classrooms</label>
+                             <input disabled type="text" class="form-control" name="classroom" id="classroom" value="5">
+                           </div>
+                             <div class="form-group">
+                               <label for="phone">EC2 Instance</label>
+                               <input disabled type="text" class="form-control" name="ec2" id="ec2" value="T3.Small">
+                           </div>
+                           <div class="form-group">
+                             <label for="last_name">Max Teachers</label>
+                               <input disabled type="text" class="form-control" name="teachers" id="teachers" value="25">
+                           </div>
+                           <div class="form-group">
+                              <label for="mobile">Upload Capacity</label>
+                              <input disabled type="text" class="form-control" name="upload" id="upload" value="500 MB Max">
+                           </div>
+                           <div class="form-group">
+                               <label for="email">Video Streaming</label>
+                               <input disabled type="email" class="form-control" name="video" id="video" value="No Autoscale">
+                           </div>
+                           <div class="form-group">
+                               <label for="email">Auto Scaling</label>
+                               <input disabled type="email" class="form-control" name="auto" id="auto" value="No Online Streaming">
+                           </div>
+                       </form>
+                     </div>
+                   </div>
+                   <div class="col-sm">
+                     <div class="card" id="enterprise_card">
+                       <div class="card-header">
+                         <button class="btn btn-lg btn-warning btn-block" type="submit" id ='enterpriseb' ><i id ='enterprise' class=""></i> Enterprise</button>
+                       </div>
+                       <form action="#" method="post" style="padding:10px;">
+                           <div class="form-group">
+                             <label for="first_name">Classrooms</label>
+                             <input disabled type="text" class="form-control" name="classroom" id="classroom" value="10">
+                           </div>
+                             <div class="form-group">
+                               <label for="phone">EC2 Instance</label>
+                               <input disabled type="text" class="form-control" name="ec2" id="ec2" value="T3.Large">
+                           </div>
+                           <div class="form-group">
+                             <label for="last_name">Max Teachers</label>
+                               <input disabled type="text" class="form-control" name="teachers" id="teachers" value="50">
+                           </div>
+                           <div class="form-group">
+                              <label for="mobile">Upload Capacity</label>
+                              <input disabled type="text" class="form-control" name="upload" id="upload" value="1 GB Max">
+                           </div>
+                           <div class="form-group">
+                               <label for="email">Video Streaming</label>
+                               <input disabled type="email" class="form-control" name="video" id="video" value="Autoscale Group">
+                           </div>
+                           <div class="form-group">
+                               <label for="email">Auto Scaling</label>
+                               <input disabled type="email" class="form-control" name="auto" id="auto" value="Online Video Streaming">
+                           </div>
+                       </form>
+                     </div>
+                   </div>
+                 </div>
+               </div>
 
-                  <div class="form-group">
-                      <div class="col-xs-4">
-                          <br>
-                          <button class="btn btn-lg btn-primary" type="reset" id ='basicb' ><i id ='basic' class=""></i> Basic</button>
-                      
-                    </div>
-                </div>
-
-                  <div class="form-group">
-                      <div class="col-xs-4">
-                          <br>
-                          <button class="btn btn-lg btn-warning" type="reset" id ='enterpriseb' ><i id ='enterprise' class=""></i> Enterprise</button>
-                    </div>
-                      </div>
 
 
-                  <form class="form" action="##" method="post" id="">
-                      <div class="form-group">
-                          
-                          <div class="col-xs-4">
-                              <label for="first_name"><h4>Classrooms</h4></label>
-                              <input disabled  type="text" class="form-control" name="classroom" id="classroom" placeholder="first name" title="enter your first name if any.">
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          
-                          <div class="col-xs-4">
-                            <label for="last_name"><h4>Max Teachers</h4></label>
-                              <input disabled type="text" class="form-control" name="teachers" id="teachers" placeholder="last name" title="enter your last name if any.">
-                          </div>
-                      </div>
-          
-                      <div class="form-group">
-                          
-                          <div class="col-xs-4">
-                              <label for="phone"><h4>EC2 Instance</h4></label>
-                              <input disabled type="text" class="form-control" name="ec2" id="ec2" placeholder="enter phone" title="enter your phone number if any.">
-                          </div>
-                      </div>
-          
-                      <div class="form-group">
-                          <div class="col-xs-4">
-                             <label for="mobile"><h4>Upload Capacity</h4></label>
-                              <input disabled type="text" class="form-control" name="upload" id="upload" placeholder="enter mobile number" title="enter your mobile number if any.">
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          
-                          <div class="col-xs-4">
-                              <label for="email"><h4>Auto Scaling</h4></label>
-                              <input disabled type="email" class="form-control" name="auto" id="auto" placeholder="you@email.com" title="enter your email.">
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          
-                          <div class="col-xs-4">
-                              <label for="email"><h4>Video Streaming</h4></label>
-                              <input disabled type="email" class="form-control" name="video" id="video" placeholder="you@email.com" title="enter your email.">
-                          </div>
-                      </div>
-                     
-             
-              	</form>
-                  
-              
+
+
+
               <hr>
-              
+
                 </div>
-               
+
               </div><!--/tab-pane-->
           </div><!--/tab-content-->
 
         </div><!--/col-9-->
     </div><!--/row-->
-                                                    
+
  <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
@@ -248,120 +287,111 @@
 
     	<script >
 
- 
-            $("#basicb").click(function(){
-		$.post("/profile/add/basic", function(data, status){
+
+        $("#basicb").click(function(){
+          console.log("Basic Clicked");
+  		    $.post("/profile/add/basic", function(data, status){
             location.reload();
+          });
         });
-    });
 
-    $("#freeb").click(function(){
-		$.post("/profile/add/free", function(data, status){
+        $("#freeb").click(function(){
+          console.log("Free Clicked");
+  		    $.post("/profile/add/free", function(data, status){
             location.reload();
+          });
         });
-    });
 
-     $("#enterpriseb").click(function(){
-		$.post("/profile/add/enterprise", function(data, status){
+        $("#enterpriseb").click(function(){
+          console.log("Enterprise Clicked");
+          $.post("/profile/add/enterprise", function(data, status){
             location.reload();
+          });
         });
-    });
-	
-function titleCase(str) {
-  return str.toLowerCase().replace(/\b(\w)/g, s => s.toUpperCase());
-}
-		$( document ).ready(function() {
-            var history = null;
 
-		$.get("/profile/get", function(data, status){
-        data = (data)[0];
-        $('#first_name').val(data.first_name);
-        $('#last_name').val(data.last_name);
-        $('#email').val(data.email);
-        $('#type').text(titleCase(data.accounttype));
-        $('#user').html("<h1>"+titleCase(data.first_name)+' ' + titleCase(data.last_name)+"</h1>");
-		});
-
-    $.get("/profile/plan",function(data){
-
-    for(var i=0;i<data.length-1;i++){
-        history = data[i];
-    if(history.type == 'free'){
-        $("#historytable").append(`
-        <tr>
-        <th scope="row">Free Tier</th>
-        <td>1</td>
-        <td>5</td>
-        <td>T3.Micro</td>
-        <td>No Video</td>
-        <td>100 MB</td>
-        <td>Free</td>
-        </tr>`)
+        function titleCase(str) {
+          return str.toLowerCase().replace(/\b(\w)/g, s => s.toUpperCase());
         }
+    		$( document ).ready(function() {
+          var history = null;
 
-    else if(history.type == 'basic'){
-            $("#historytable").append(`
-        <tr>
-        <th scope="row">Basic Tier</th>
-        <td>5</td>
-        <td>25</td>
-        <td>T3.Small</td>
-        <td>No Video</td>
-        <td>500 MB</td>
-        <td>$14.99</td>
-        </tr>`)
-    }
-    else if(history.type == 'enterprise'){
-               $("#historytable").append(`
-        <tr>
-        <th scope="row">Enterprise Tier</th>
-        <td>10</td>
-        <td>50</td>
-        <td>T3.Large</td>
-        <td>Video Streaming</td>
-        <td>1 GB</td>
-        <td>$24.99</td>
-        </tr>`)
-    }
-    }
-    
-   
+      		$.get("/profile/get", function(data, status){
+              data = (data)[0];
+              $('#first_name').val(data.FIRST_NAME);
+              $('#last_name').val(data.LAST_NAME);
+              $('#email').val(data.EMAIL);
+              $('#type').text(titleCase(data.ACCOUNTTYPE));
+              $('#user').html("<h1>"+titleCase(data.FIRST_NAME)+' ' + titleCase(data.LAST_NAME)+"</h1>");
+      		});
 
-        data = data[data.length-1];
-        console.log(data);
-      if(data.type == 'free'){
-        $('#free').addClass("glyphicon glyphicon-ok-sign");
-        $("#classroom").val('1');
-        $("#ec2").val('T3.Micro');
-        $("#teachers").val('10');
-        $("#upload").val('100 MB MAX');
-        $("#video").val('No online Steaming');
-        $("#auto").val('No AutoScale');
-      } 
-      else
-      if(data.type == 'basic'){
-        $('#basic').addClass("glyphicon glyphicon-ok-sign");
-        $("#classroom").val('5');
-        $("#ec2").val('T3.Small');
-        $("#teachers").val('25');
-        $("#upload").val('500 MB MAX');
-        $("#video").val('No online Steaming');
-        $("#auto").val('AutoScale Group');
-      }
-      else{
-        $('#enterprise').addClass("glyphicon glyphicon-ok-sign");
-         $("#classroom").val('10');
-        $("#ec2").val('T3.Large');
-        $("#teachers").val('50');
-        $("#upload").val('1GB MAX');
-        $("#video").val('Online Video Steaming');
-        $("#auto").val('AutoScale Group');
-      }
-    });
+          $.get("/profile/plan",function(data){
+            for(var i=0;i< data.length - 1;i++){
+              history = data[i];
+              switch (history.TYPE){
+                case 'free':
+                  $("#historytable").append(`
+                  <tr>
+                  <td>Free Tier</td>
+                  <td>1</td>
+                  <td>5</td>
+                  <td>T3.Micro</td>
+                  <td>No Video</td>
+                  <td>100 MB</td>
+                  <td>Free</td>
+                  </tr>`);
+                break;
+                case 'basic':
+                  $("#historytable").append(`
+                  <tr>
+                  <td>Basic Tier</td>
+                  <td>5</td>
+                  <td>25</td>
+                  <td>T3.Small</td>
+                  <td>No Video</td>
+                  <td>500 MB</td>
+                  <td>$14.99</td>
+                  </tr>`);
+                break;
+                case 'enterprise':
+                  $("#historytable").append(`
+                  <tr>
+                  <td>Enterprise Tier</td>
+                  <td>10</td>
+                  <td>50</td>
+                  <td>T3.Large</td>
+                  <td>Video Streaming</td>
+                  <td>1 GB</td>
+                  <td>$24.99</td>
+                  </tr>`);
+                break;
+              }
+            }
 
 
-	
-	});
+            if (data.length == 0){
 
-		
-	</script>
+            } else {
+              history = data[data.length-1];
+              switch (history.TYPE){
+                case 'free':
+                  $('#free').addClass("fas fa-check-circle");
+                  $('#freeb').attr('disabled', true);
+                  $('#free_card').addClass('border-primary');
+                break;
+                case 'basic':
+                  $('#basic').addClass("fas fa-check-circle");
+                  $('#basicb').attr('disabled', true);
+                  $('#basic_card').addClass('border-primary');
+                break;
+                case 'enterprise':
+                  $('#enterprise').addClass("fas fa-check-circle");
+                  $('#enterpriseb').attr('disabled', true);
+                  $('#enterprise_card').addClass('border-primary');
+                break;
+              }
+            }
+          });
+      	});
+      </script>
+  </body>
+</html>

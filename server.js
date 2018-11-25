@@ -1,13 +1,15 @@
-var prefix = "";
+var prefix = "aas";
 var PORT = 8080;
 var CONFIG_TABLENAME = prefix + "config";
 var USERS_TABLE = prefix + "users";
 var PLANS_TABLE = prefix + "plans";
 
 var express = require('express')
+var session = require('express-session');
 let app = express();
 let path = require('path');
 var mysql = require('mysql');
+
 
 var bodyParser = require('body-parser');
 var connection = mysql.createConnection({
@@ -17,226 +19,425 @@ var connection = mysql.createConnection({
     database:process.env.MYSQL_DATABASE,
     multipleStatements: true
 });
-
+app.use(session({
+    secret: 'virtual_knowledge_secret',
+    resave: false,
+    saveUninitialized: true
+}));
 app.use(express.static(path.join(__dirname, 'public')));
-var urlencodedParser = bodyParser.urlencoded({extended:false})
+var urlencodedParser = bodyParser.urlencoded({extended:true})
 
+var db = require('./database');
+
+var sess;
 connection.connect(function(err) {
-    if (err) {
-      console.error('Database connection failed');
-      return;
-    }
-    console.log('Connected to database.');
-    /* First time run */
-    //var sql = "select count(*) as exists from information_schema.tables where table_schema='" + process.env.DATABSE_HOST + "'";
-    var sql = "select count(*) as cnt from information_schema.tables where table_schema='" + process.env.DATABASE_HOST + "' and table_name ='" + CONFIG_TABLENAME + "'";
-    connection.query(sql, function (err, result) {
-      if (err) {
-        console.error('Initial Load failed');
-        return;
-      }
-      console.log(result);
-      if (result[0].cnt == 0 ) {
-        var sql = "CREATE TABLE " + CONFIG_TABLENAME + "(ID INT NOT NULL AUTO_INCREMENT, name varchar(255) NOT NULL, value text not null, PRIMARY KEY(ID))";
-        connection.query(sql, function (err, result) {
-          if (err) {
-            return;
-          }
-          console.log("Config table created");
-        });
-        var sql = "INSERT INTO " + CONFIG_TABLENAME + "(ID, name, value) values (null, 'setup_complete', '1')";
-        connection.query(sql, function (err, result) {
-          if (err) {
-            return;
-          }
-          console.log("Config table populated");
-        });
-
-        var sql = "CREATE TABLE " + USERS_TABLE + " (ID INT NOT NULL AUTO_INCREMENT, first_name VARCHAR(255) NOT NULL, last_name VARCHAR(255) NOT NULL, email VARCHAR(255),password VARCHAR (100),accounttype VARCHAR (20) ,PRIMARY KEY(ID)) ";
-        connection.query(sql, function (err, result) {
-          if (err) {
-            return;
-          }
-          console.log("Users table created");
-        });
-
-        var sql = "INSERT INTO " + USERS_TABLE + "(first_name,last_name,email,password,accounttype) values ('admin','admin','admin@gmail.com','adminpw', 'Administrator')"
-        connection.query(sql, function (err, result) {
-          if (err) {
-            return;
-          }
-          console.log("Inserted admin");
-        });
-
-        var sql = "CREATE TABLE " + PLANS_TABLE + " (id INT NOT NULL AUTO_INCREMENT, type VARCHAR(255) NOT NULL, active varchar(1),customerid int not null,  PRIMARy KEY(ID) , FOREIGN KEY (customerid) REFERENCES users (ID)) ";
-        connection.query(sql, function (err, result) {
-          if (err) {
-            return;
-          }
-          console.log("Plan table created");
-        });
-      }
-    });
+  if (err) {
+    console.error('Database connection failed');
+    return;
+  }
+  console.log('Connected to database.');
+  /* First time run */
+  /* Checks if the config table has been made */
+  sql = db.countConfig({
+    MYSQL_DATABASE: process.env.MYSQL_DATABASE
   });
-
-var sql = "Select * from users";
-
   connection.query(sql, function (err, result) {
-    if (err) {
+    if (err){
+      console.log("Error occurred");
       return;
     }
-    console.log(result);
-  });
-
-
-
-app.post('/saveuser',urlencodedParser   , (req, res) => {
-    let body = req.body;
-    var  first_names = body.firstname;
-    var  last_names = body.lastname;
-    var  passwords = body.pass;
-    var  accounttypes = body.type;
-    var  emails = body.email;
-
-
-    var values = {first_name:first_names,
-                    last_name:last_names,
-                    password:passwords,
-                    email:emails,
-                    accounttype:accounttypes
-                }
-
-    var sql = "INSERT INTO " + USERS_TABLE + " SET ?";
-    connection.query(sql ,values,function (err, result) {
-    if (err) throw err;
-    console.log(result,err);
-    })
-    res.sendFile(path.join(__dirname + '/login.html'));
-})
-var account = null;
-var accountid = null;
-app.post('/getloggedin',urlencodedParser, (req, res) => {
-    var body = req.body;
-    var email = body.email;
-    var password = body.pass;
-    // console.log(body);
-
-    var cred = 'SELECT id,password from ' + USERS_TABLE + ' where email = ?';
-    connection.query(cred, email,function (err, result) {
-        if (err) throw err;
-        console.log(err,result)
-        try{
-            if (result[0]['password'] == password){
-                accountid =result[0]['id'];
-                account = email;
-                res.sendFile(path.join(__dirname + '/home.html'));
-    
-            }
-            else{
-                res.redirect('/log-in');
-                // console.log(result[0]['password']);
-            }
-
-        }catch( e){
-            if(e){
-                res.redirect('/log-in');
-            }
+    /* If config not made then make setup tables */
+    if (result[0].cnt == 0){
+      console.log("Creating config");
+      /* Create config table and populate it */
+      sql = db.createConfig();
+      connection.query(sql, function (err, result) {
+        if (err){
+          console.log("Error creating Config table");
+          return;
         }
-            
-        
-       
-    })
+      });
+      sql = db.insertConfig({
+        ID: null,
+        NAME: 'setup_complete',
+        VALUE: '1'
+      });
+      connection.query(sql, function (err, result) {
+        if (err){
+          console.log("Error Adding data to Config table");
+          return;
+        }
+      });
 
+      /* Create user table and populate it with an admin user*/
+      sql = db.createUser();
+      connection.query(sql, function (err, result) {
+        if (err){
+          console.log("Error creating User table");
+          return;
+        }
+      });
+      sql = db.insertConfig({
+        FIRST_NAME: 'admin',
+        LAST_NAME: 'admin',
+        EMAIL: 'admin@velearning.com',
+        PASSWORD: 'adminpw',
+        ACCOUNTTYPE: 'Administrator'
+      });
+      connection.query(sql, function (err, result) {
+        if (err){
+          console.log("Error Adding data to User table");
+          return;
+        }
+      });
+
+      /* Create Plan table*/
+      sql = db.createPlan();
+      connection.query(sql, function (err, result) {
+        if (err){
+          console.log("Error creating Plan table");
+          return;
+        }
+      });
+    }
+  });
 });
 
+/* Home Page */
 app.get('/', (req, res) => {
+  if (req.session.email){
+    res.sendFile(path.join(__dirname + '/home_loggedin.html'));
+  } else {
     res.sendFile(path.join(__dirname + '/home.html'));
-})
+  }
+});
 
+/* Sign up Page */
 app.get('/sign-up', (req, res) => {
-    if(accountid !=null){
+  if(req.session.email){
     res.sendFile(path.join(__dirname + '/profile.html'));
-
-    }
-    else
+  } else {
     res.sendFile(path.join(__dirname + '/register.html'));
-})
+  }
+});
 
+/* Log in Page */
 app.get('/log-in', (req, res) => {
-    account = null;
-    accountid = null;
-    res.sendFile(path.join(__dirname + '/login.html'));
+  if (req.session.email){
+    res.redirect('/profile');
+  } else {
+     res.sendFile(path.join(__dirname + '/login.html'));
+  }
+});
+app.get('/log-out', (req, res) => {
+  req.session.destroy(function(err) {
+    if(err) {
+      res.redirect('profile');
+      return ;
+    }
+    res.redirect('/');
+  });
+});
+
+/* Create the User */
+app.post('/saveuser',urlencodedParser   , (req, res) => {
+  let body = req.body;
+  var  first_name = body.firstname;
+  var  last_name = body.lastname;
+  var  password = body.pass;
+  var  accounttype = body.type;
+  var  email = body.email;
+
+
+  var values = {FIRST_NAME:first_name,
+                  LAST_NAME:last_name,
+                  PASSWORD:password,
+                  EMAIL:email,
+                  ACCOUNTTYPE:accounttype
+              }
+  sql = db.insertUser(values);
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log("Error making user");
+      res.sendFile(path.join(__dirname + '/register.html'));
+      return
+    }
+    if (accounttype == 'Teacher'){
+      var sql = db.selectUserbyEmail({
+        EMAIL: email
+      });
+      connection.query(sql, function (err, result) {
+        if (err){
+          return;
+        }
+        var values =
+        {
+            TYPE:'free',
+            ACTIVE:'1',
+            CUSTOMERID:result[0].ID
+        }
+        var sql = db.insertPlan(values);
+        console.log(sql);
+        connection.query(sql, function (err, result) {
+          if (err){
+            return;
+          }
+        })
+      });
+    }
+    req.session.email = email;
+    res.redirect('/profile');
+  });
 })
 
+/* verify user when logging in */
+app.post('/getloggedin',urlencodedParser, (req, res) => {
+  var body = req.body;
+  var email = body.email;
+  var password = body.pass;
+  sql = db.verifyUser({
+    EMAIL: email,
+    PASSWORD: password
+  });
+  connection.query(sql,function (err, result) {
+    if (err) {
+      console.log("Error trying to verify password");
+      res.redirect('/log-in');
+      return;
+    }
+    try{
+      if (result[0].verified == 1){
+        /* Session stuff here */
+        req.session.email = email;
+        res.redirect('/profile');
+      } else{
+        res.redirect('/log-in');
+      }
+
+    } catch( e){
+        res.redirect('/log-in');
+    }
+  })
+});
 
 app.get('/pricing', (req, res) => {
-
+  if (req.session.email){
+    res.sendFile(path.join(__dirname + '/pricing_loggedin.html'));
+  } else {
     res.sendFile(path.join(__dirname + '/pricing.html'));
+  }
 })
 
 app.get('/profile', (req, res) => {
+  if (req.session.email){
+    var sql = db.selectUserbyEmail({
+      EMAIL: req.session.email
+    });
+    connection.query(sql, function (err, result) {
+      if (err){
+        res.redirect('/log-out')
+        return;
+      }
+      try{
+        switch (result[0].ACCOUNTTYPE){
+          case 'Administrator':
+            res.sendFile(path.join(__dirname + '/profile_admin.html'));
+          break;
+          case 'Teacher':
+            res.sendFile(path.join(__dirname + '/profile.html'));
+          break;
+          default:
+            res.sendFile(path.join(__dirname + '/profile_student.html'));
+          break;
+        }
+      } catch (err){
 
-      res.sendFile(path.join(__dirname + '/profile.html'));
+      }
+    });
+  } else {
+    res.redirect('/log-in');
+  }
 })
+
 app.get('/profile/get',(req,res)=>{
-    console.log(account);
-    var cred = `SELECT * from ` + USERS_TABLE + ` where users.id = `+accountid+` `;
-    connection.query(cred, function (err, result) {
-     console.log(result,err);
-    res.send((result));
-})
+  if (req.session.email){
+    var sql = db.selectUserbyEmail({
+      EMAIL: req.session.email
+    })
+    connection.query(sql, function (err, result) {
+      if (err){
+        res.send({});
+        return;
+      }
+      res.send(result);
+    });
+  } else {
+    res.send({});
+  }
 });
 
 app.get('/profile/plan',(req,res)=>{
-    var cred = 'SELECT * from ' + PLANS_TABLE + ' where plans.customerid = ?';
-    connection.query(cred, accountid,function (err, result) {
-        // console.log(result)
-    res.send((result));
-})
+  if (req.session.email){
+    var sql = db.selectPlanbyEmail({
+      EMAIL: req.session.email
+    })
+    connection.query(sql, function (err, result) {
+      if (err){
+        res.send({});
+        return;
+      }
+      res.send(result);
+    });
+  } else {
+    res.send({});
+  }
+});
+
+app.get('/profile/plan-admin',(req,res)=>{
+  if (req.session.email){
+    var sql = db.selectPlanAdmin({
+      EMAIL: req.session.email
+    });
+    console.log(sql);
+    connection.query(sql, function (err, result) {
+      if (err){
+        res.send({});
+        return;
+      }
+      res.send(result);
+    });
+  } else {
+    res.send({});
+  }
 });
 
 
 app.post('/profile/add/free',(req,res)=>{
-    var values =
-    {
-        type:'free',
-        active:'1',
-        customerid:accountid
-    }
-    var insert = 'INSERT INTO ' + PLANS_TABLE + ' SET ? ';
-    connection.query(insert, values,function (err, result) {
-    res.sendFile(path.join(__dirname + '/home.html'));
-})
+  if (req.session.email){
+    var sql = db.selectUserbyEmail({
+      EMAIL: req.session.email
+    });
+    connection.query(sql, function (err, result) {
+      if (err){
+        res.send({});
+        return;
+      }
+      var values =
+      {
+          TYPE:'free',
+          ACTIVE:'1',
+          CUSTOMERID:result[0].ID
+      }
+      var sql = db.insertPlan(values);
+      console.log(sql);
+      connection.query(sql, function (err, result) {
+        if (err){
+          res.send({});
+          return;
+        }
+        res.send({});
+      })
+    });
+
+  } else {
+    res.send({});
+  }
 });
 
 app.post('/profile/add/basic',(req,res)=>{
-    var values =
-    {
-        type:'basic',
-        active:'1',
-        customerid:accountid
-    }
-    var insert = 'INSERT INTO ' + PLANS_TABLE + ' SET ? ';
-    connection.query(insert, values,function (err, result) {
-
-    res.send((result));
-})
+  if (req.session.email){
+    var sql = db.selectUserbyEmail({
+      EMAIL: req.session.email
+    });
+    connection.query(sql, function (err, result) {
+      if (err){
+        res.send({});
+        return;
+      }
+      var values =
+      {
+          TYPE:'basic',
+          ACTIVE:'1',
+          CUSTOMERID:result[0].ID
+      }
+      var sql = db.insertPlan(values);
+      connection.query(sql, function (err, result) {
+        if (err){
+          res.send({});
+          return;
+        }
+        res.send({});
+      })
+    });
+  } else {
+    res.send({});
+  }
 });
 
 app.post('/profile/add/enterprise',(req,res)=>{
-    var values =
-    {
-        type:'enterprise',
-        active:'1',
-        customerid:accountid
-    }
-    var insert = 'INSERT INTO ' + PLANS_TABLE + ' SET ? ';
-    connection.query(insert, values,function (err, result) {
-    res.send((result));
-})
+  if (req.session.email){
+    var sql = db.selectUserbyEmail({
+      EMAIL: req.session.email
+    });
+    connection.query(sql, function (err, result) {
+      if (err){
+        res.send({});
+        return;
+      }
+      var values =
+      {
+          TYPE:'enterprise',
+          ACTIVE:'1',
+          CUSTOMERID:result[0].ID
+      }
+      var sql = db.insertPlan(values);
+      connection.query(sql, function (err, result) {
+        if (err){
+          res.send({});
+          return;
+        }
+        res.send({});
+      })
+    });
+  } else {
+    res.send({});
+  }
+});
+
+/* Ajax Queries */
+app.post('/verifyUser',(req,res) => {
+  if (req.method === 'POST'){
+    let body = '';
+    req.on('data', chunk => {
+      body += chunk.toString();
+    });
+    req.on('end', () => {
+      temp = JSON.parse(body);
+      var email = temp.email;
+      var password = temp.password;
+      sql = db.verifyUser({
+        EMAIL: email,
+        PASSWORD: password
+      });
+      connection.query(sql, email,function (err, result) {
+        if (err){
+          res.send("no");
+          return;
+        }
+        try{
+          if (result[0].verified == 1){
+            res.send("yes");
+          } else {
+            res.send("no");
+          }
+        } catch (e){
+          res.send('no');
+        }
+      });
+    });
+  }
 });
 
 
 
-
-app.listen(8080);
+app.listen(PORT);
