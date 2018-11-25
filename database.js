@@ -1,33 +1,7 @@
-var prefix = "aas_";
+var prefix = "";
 var CONFIG_TABLENAME = prefix + "config";
 var USERS_TABLE = prefix + "users";
 var PLANS_TABLE = prefix + "plans";
-
-/*function executeDBQuery(connection,sql){
-  output = false;
-  connection.query(sql, function (err, result) {
-    if (err) {
-      return false;
-    }
-    output = true;
-    return true;
-  });
-  return output;
-}
-
-function selectDBQuery(connection,sql, output){
-  connection.query(sql, function (err, result) {
-    if (err) {
-      console.log("Error ocucred");
-      return false;
-    } else {
-      console.log("Select occured okay");
-      output = result;
-      return result;
-    }
-  });
-}
-*/
 /* config tables */
 exports.createConfig = function(){
   var sql = "CREATE TABLE " + CONFIG_TABLENAME + "(ID INT NOT NULL AUTO_INCREMENT, name varchar(255) NOT NULL, value text not null, PRIMARY KEY(ID))";
