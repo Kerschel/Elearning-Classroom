@@ -40,18 +40,18 @@ exports.selectUserbyEmail = function (arr){
 
 /* Plan tables */
 exports.createPlan = function (){
-  var sql = "CREATE TABLE " + PLANS_TABLE + " (id INT NOT NULL AUTO_INCREMENT, type VARCHAR(255) NOT NULL, active varchar(1),customerid int not null,  PRIMARY KEY(ID) , FOREIGN KEY (customerid) REFERENCES users (ID)) ";
+  var sql = "CREATE TABLE " + PLANS_TABLE + " (id INT NOT NULL AUTO_INCREMENT, type VARCHAR(255) NOT NULL, active varchar(1),customerid int not null, creation_timestamp timestamp not null,  PRIMARY KEY(ID) , FOREIGN KEY (customerid) REFERENCES users (ID)) ";
   return sql;
 }
 exports.insertPlan = function (arr){
-  var sql = "INSERT INTO " + PLANS_TABLE + " (ID, TYPE, ACTIVE, CUSTOMERID) values (null,'" + arr['TYPE'] + "','" + arr['ACTIVE'] + "','" + arr['CUSTOMERID'] + "')"
+  var sql = "INSERT INTO " + PLANS_TABLE + " (ID, TYPE, ACTIVE, CUSTOMERID, CREATION_TIMESTAMP) values (null,'" + arr['TYPE'] + "','" + arr['ACTIVE'] + "','" + arr['CUSTOMERID'] + "',current_timestamp)";
   return sql;
 }
 exports.selectPlanbyEmail = function (arr){
-  var sql = "SELECT a.ID, a.TYPE, a.ACTIVE, a.CUSTOMERID FROM " + PLANS_TABLE + " a, " + USERS_TABLE + " b where a.customerid = b.id and b.email = '" + arr['EMAIL'] + "'";
+  var sql = "SELECT a.ID, a.TYPE, a.ACTIVE, a.CUSTOMERID, convert_tz(a.CREATION_TIMESTAMP,'+00:00','America/La_Paz') as CREATION_TIMESTAMP FROM " + PLANS_TABLE + " a, " + USERS_TABLE + " b where a.customerid = b.id and b.email = '" + arr['EMAIL'] + "' order by a.ID asc";
   return sql;
 }
 exports.selectPlanAdmin = function(arr){
-  var sql = "SELECT b.EMAIL, b.FIRST_NAME, b.LAST_NAME, a.TYPE, a.ACTIVE FROM " + PLANS_TABLE + " a, " + USERS_TABLE + " b where a.customerid = b.id and a.ID = (select max(b_ed.ID) from " + PLANS_TABLE + " b_ed where b_ed.customerid = a.customerid) order by b.ID";
+  var sql = "SELECT b.EMAIL, b.FIRST_NAME, b.LAST_NAME, a.TYPE, a.ACTIVE, convert_tz(a.CREATION_TIMESTAMP,'+00:00','America/La_Paz') as CREATION_TIMESTAMP FROM " + PLANS_TABLE + " a, " + USERS_TABLE + " b where a.customerid = b.id and a.ID = (select max(b_ed.ID) from " + PLANS_TABLE + " b_ed where b_ed.customerid = a.customerid) order by b.ID";
   return sql;
 }

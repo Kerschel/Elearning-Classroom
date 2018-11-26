@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Profile Page</title>
+    <title>Virtual Knowledge - Profile</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -135,22 +135,19 @@
              </div><!--/tab-pane-->
         <!-- Plan History -->
         <div class="tab-pane" id="history">
-            <table class="table">
+            <table class="table table-striped">
                <thead>
                     <tr>
+                        <th scope="col">Date Registered</th>
                         <th scope="col">Plan</th>
-                        <th scope="col">Classrooms</th>
-                        <th scope="col">Teachers</th>
-                        <th scope="col">EC2</th>
-                        <th scope="col">Video</th>
-                        <th scope="col">Upload Cap.</th>
                         <th scope="col">Price</th>
+                        <th scope="col">Details</th>
                     </tr>
-                     <tbody id='historytable'>
+               </thead>
+               <tbody id='historytable'>
 
-                     </tbody>
-                </thead>
-                </table>
+               </tbody>
+          </table>
         </div><!--/tab-pane-->
 
 
@@ -165,7 +162,7 @@
                    <div class="col-sm">
                      <div class="card"id="free_card">
                        <div class="card-header">
-                         <button class="btn btn-lg btn-success btn-block" type="submit" id ='freeb' ><i id ='free' class=""></i> FREE</button>
+                         <button class="btn btn-lg btn-success btn-block" type="button" id ='freeb' data-toggle="modal" data-target="#free_modal"><i id ='free' class=""></i> FREE</button>
                        </div>
                        <form action="#" method="post" style="padding:10px;">
                            <div class="form-group">
@@ -177,7 +174,7 @@
                                <input disabled type="text" class="form-control" name="ec2" id="ec2" value="T3.Micro">
                            </div>
                            <div class="form-group">
-                             <label for="last_name">Max Teachers</label>
+                             <label for="last_name">Max Students</label>
                                <input disabled type="text" class="form-control" name="teachers" id="teachers" value="10">
                            </div>
                            <div class="form-group">
@@ -185,12 +182,16 @@
                               <input disabled type="text" class="form-control" name="upload" id="upload" value="100 MB Max">
                            </div>
                            <div class="form-group">
-                               <label for="email">Video Streaming</label>
-                               <input disabled type="email" class="form-control" name="video" id="video" value="No Autoscale">
+                               <label for="email">Online Video Streaming</label>
+                               <input disabled type="email" class="form-control" name="auto" id="auto" value="No">
                            </div>
                            <div class="form-group">
                                <label for="email">Auto Scaling</label>
-                               <input disabled type="email" class="form-control" name="auto" id="auto" value="No Online Streaming">
+                               <input disabled type="email" class="form-control" name="video" id="video" value="No">
+                           </div>
+                           <div class="form-group">
+                               <label for="email">Price</label>
+                               <input disabled type="email" class="form-control" name="video" id="video" value="Free">
                            </div>
                        </form>
                      </div>
@@ -198,7 +199,7 @@
                    <div class="col-sm">
                      <div class="card" id="basic_card">
                        <div class="card-header">
-                         <button class="btn btn-lg btn-primary btn-block" type="submit" id ='basicb' ><i id ='basic' class=""></i> Basic</button>
+                         <button class="btn btn-lg btn-primary btn-block" type="submit" id ='basicb' data-toggle="modal" data-target="#basic_modal" ><i id ='basic' class=""></i> Basic</button>
                        </div>
                        <form action="#" method="post" style="padding:10px;">
                            <div class="form-group">
@@ -210,7 +211,7 @@
                                <input disabled type="text" class="form-control" name="ec2" id="ec2" value="T3.Small">
                            </div>
                            <div class="form-group">
-                             <label for="last_name">Max Teachers</label>
+                             <label for="last_name">Max Students</label>
                                <input disabled type="text" class="form-control" name="teachers" id="teachers" value="25">
                            </div>
                            <div class="form-group">
@@ -218,12 +219,16 @@
                               <input disabled type="text" class="form-control" name="upload" id="upload" value="500 MB Max">
                            </div>
                            <div class="form-group">
-                               <label for="email">Video Streaming</label>
-                               <input disabled type="email" class="form-control" name="video" id="video" value="No Autoscale">
+                               <label for="email">Online Video Streaming</label>
+                               <input disabled type="email" class="form-control" name="auto" id="auto" value="No">
                            </div>
                            <div class="form-group">
                                <label for="email">Auto Scaling</label>
-                               <input disabled type="email" class="form-control" name="auto" id="auto" value="No Online Streaming">
+                               <input disabled type="email" class="form-control" name="video" id="video" value="Yes">
+                           </div>
+                           <div class="form-group">
+                               <label for="email">Price</label>
+                               <input disabled type="email" class="form-control" name="video" id="video" value="$14.99">
                            </div>
                        </form>
                      </div>
@@ -231,7 +236,7 @@
                    <div class="col-sm">
                      <div class="card" id="enterprise_card">
                        <div class="card-header">
-                         <button class="btn btn-lg btn-warning btn-block" type="submit" id ='enterpriseb' ><i id ='enterprise' class=""></i> Enterprise</button>
+                         <button class="btn btn-lg btn-warning btn-block" type="submit" id ='enterpriseb'  data-toggle="modal" data-target="#enterprise_modal"><i id ='enterprise' class=""></i> Enterprise</button>
                        </div>
                        <form action="#" method="post" style="padding:10px;">
                            <div class="form-group">
@@ -243,7 +248,7 @@
                                <input disabled type="text" class="form-control" name="ec2" id="ec2" value="T3.Large">
                            </div>
                            <div class="form-group">
-                             <label for="last_name">Max Teachers</label>
+                             <label for="last_name">Max Students</label>
                                <input disabled type="text" class="form-control" name="teachers" id="teachers" value="50">
                            </div>
                            <div class="form-group">
@@ -251,12 +256,16 @@
                               <input disabled type="text" class="form-control" name="upload" id="upload" value="1 GB Max">
                            </div>
                            <div class="form-group">
-                               <label for="email">Video Streaming</label>
-                               <input disabled type="email" class="form-control" name="video" id="video" value="Autoscale Group">
+                               <label for="email">Online Video Streaming</label>
+                               <input disabled type="email" class="form-control" name="auto" id="auto" value="Yes">
                            </div>
                            <div class="form-group">
                                <label for="email">Auto Scaling</label>
-                               <input disabled type="email" class="form-control" name="auto" id="auto" value="Online Video Streaming">
+                               <input disabled type="email" class="form-control" name="video" id="video" value="Yes">
+                           </div>
+                           <div class="form-group">
+                               <label for="email">Price</label>
+                               <input disabled type="email" class="form-control" name="video" id="video" value="$24.99">
                            </div>
                        </form>
                      </div>
@@ -278,7 +287,66 @@
 
         </div><!--/col-9-->
     </div><!--/row-->
-
+    <!-- Modal Free -->
+    <div class="modal fade" id="free_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-success">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Change to Free Plan?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to change to a free plan?
+          </div>
+          <div class="modal-footer">
+            <a id="free_submit" type="button" class="btn btn-success">Yes</a>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Basic -->
+    <div class="modal fade" id="basic_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-primary">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Change to Basic Plan?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to change to a Basic plan?
+          </div>
+          <div class="modal-footer">
+            <a id="basic_submit" type="button" class="btn btn-primary">Yes</a>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Enterprise -->
+    <div class="modal fade" id="enterprise_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-warning">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Change to Enterprise Plan?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to change to a Enterprise plan?
+          </div>
+          <div class="modal-footer">
+            <a id="enterprise_submit" type="button" class="btn btn-warning">Yes</a>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          </div>
+        </div>
+      </div>
+    </div>
  <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
@@ -288,21 +356,22 @@
     	<script >
 
 
-        $("#basicb").click(function(){
+
+
+        $("#free_submit").click(function(){
+          console.log("Free Clicked");
+          $.post("/profile/add/free", function(data, status){
+            location.reload();
+          });
+        });
+        $("#basic_submit").click(function(){
           console.log("Basic Clicked");
   		    $.post("/profile/add/basic", function(data, status){
             location.reload();
           });
         });
 
-        $("#freeb").click(function(){
-          console.log("Free Clicked");
-  		    $.post("/profile/add/free", function(data, status){
-            location.reload();
-          });
-        });
-
-        $("#enterpriseb").click(function(){
+        $("#enterprise_submit").click(function(){
           console.log("Enterprise Clicked");
           $.post("/profile/add/enterprise", function(data, status){
             location.reload();
@@ -327,41 +396,62 @@
           $.get("/profile/plan",function(data){
             for(var i=0;i< data.length - 1;i++){
               history = data[i];
+              var date_str = history.CREATION_TIMESTAMP;
+              date_str = date_str.replace('T',' ');
+              date_str = date_str.replace('Z','');
               switch (history.TYPE){
                 case 'free':
                   $("#historytable").append(`
                   <tr>
+                  <th scope="row">` + date_str +`</th>
                   <td>Free Tier</td>
-                  <td>1</td>
-                  <td>5</td>
-                  <td>T3.Micro</td>
-                  <td>No Video</td>
-                  <td>100 MB</td>
                   <td>Free</td>
+                  <td>
+                    <ul>
+                      <li>Classrooms: 1</li>
+                      <li>EC2 Instance: T3.Micro</li>
+                      <li>Max Students: 10</li>
+                      <li>Max Upload: 100 MB</li>
+                      <li>Video Streaming: No Video</li>
+                      <li>Auto Scaling: None</li>
+                    </ul>
+                  </td>
                   </tr>`);
                 break;
                 case 'basic':
                   $("#historytable").append(`
                   <tr>
+                  <th scope="row">` + date_str +`</th>
                   <td>Basic Tier</td>
-                  <td>5</td>
-                  <td>25</td>
-                  <td>T3.Small</td>
-                  <td>No Video</td>
-                  <td>500 MB</td>
                   <td>$14.99</td>
+                  <td>
+                    <ul>
+                      <li>Classrooms: 5</li>
+                      <li>EC2 Instance: T3.Small</li>
+                      <li>Max Students: 25</li>
+                      <li>Max Upload: 500 MB</li>
+                      <li>Video Streaming: No Video</li>
+                      <li>Auto Scaling: Yes</li>
+                    </ul>
+                  </td>
                   </tr>`);
                 break;
                 case 'enterprise':
                   $("#historytable").append(`
                   <tr>
-                  <td>Enterprise Tier</td>
-                  <td>10</td>
-                  <td>50</td>
-                  <td>T3.Large</td>
-                  <td>Video Streaming</td>
-                  <td>1 GB</td>
-                  <td>$24.99</td>
+                  <th scope="row">` + date_str +`</th>
+                  <td>Basic Tier</td>
+                  <td>$14.99</td>
+                  <td>
+                    <ul>
+                      <li>Classrooms: 10</li>
+                      <li>EC2 Instance: T3.Large</li>
+                      <li>Max Students: 50</li>
+                      <li>Max Upload: 1 GB</li>
+                      <li>Video Streaming: Yes</li>
+                      <li>Auto Scaling: Yes</li>
+                    </ul>
+                  </td>
                   </tr>`);
                 break;
               }
@@ -376,7 +466,7 @@
                 case 'free':
                   $('#free').addClass("fas fa-check-circle");
                   $('#freeb').attr('disabled', true);
-                  $('#free_card').addClass('border-primary');
+                  $('#free_card').addClass('border-success');
                 break;
                 case 'basic':
                   $('#basic').addClass("fas fa-check-circle");
@@ -386,7 +476,7 @@
                 case 'enterprise':
                   $('#enterprise').addClass("fas fa-check-circle");
                   $('#enterpriseb').attr('disabled', true);
-                  $('#enterprise_card').addClass('border-primary');
+                  $('#enterprise_card').addClass('border-warning');
                 break;
               }
             }

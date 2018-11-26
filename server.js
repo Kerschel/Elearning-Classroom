@@ -77,7 +77,7 @@ connection.connect(function(err) {
           return;
         }
       });
-      sql = db.insertConfig({
+      sql = db.insertUser({
         FIRST_NAME: 'admin',
         LAST_NAME: 'admin',
         EMAIL: 'admin@velearning.com',
@@ -177,7 +177,6 @@ app.post('/saveuser',urlencodedParser   , (req, res) => {
             CUSTOMERID:result[0].ID
         }
         var sql = db.insertPlan(values);
-        console.log(sql);
         connection.query(sql, function (err, result) {
           if (err){
             return;
@@ -298,7 +297,6 @@ app.get('/profile/plan-admin',(req,res)=>{
     var sql = db.selectPlanAdmin({
       EMAIL: req.session.email
     });
-    console.log(sql);
     connection.query(sql, function (err, result) {
       if (err){
         res.send({});
@@ -329,7 +327,6 @@ app.post('/profile/add/free',(req,res)=>{
           CUSTOMERID:result[0].ID
       }
       var sql = db.insertPlan(values);
-      console.log(sql);
       connection.query(sql, function (err, result) {
         if (err){
           res.send({});
